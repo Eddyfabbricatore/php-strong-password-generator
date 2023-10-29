@@ -1,0 +1,44 @@
+body{
+  background-color: #001632;
+}
+
+h1{
+  color: #808b98;
+}
+
+h2,
+h3{
+  color: #fff;
+}
+
+p{
+  color: #0f5262;
+}
+
+input{
+  width: auto !important;
+}
+
+.container{
+  height: 100vh;
+}
+
+.box{
+  padding: 20px 15px;
+  width: 900px;
+}
+
+.box-paragraph,
+.box-passwordGenerated,
+.box-error{
+  background-color: #cff4fc;
+}
+
+.box-password{
+  background-color: #f8f9fa;
+}
+
+.box-paragraph,
+.password{
+  margin-bottom: 20px;
+}

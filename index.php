@@ -1,17 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
+  include __DIR__ . "/partials/functions.php";
 
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  $characters = 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890\'\|!"£$%&/()=?^+-*/èòàùì.,;:_';
 
-  <title>PHP Strong Password Generator</title>
-</head>
-<body>
-  
+  if(isset($_POST['generatePassword'])){
+    if($_POST['generatePassword'] < 8 || $_POST['generatePassword'] > 32){
+      session_start();
+
+      $_SESSION['errorGeneration'] = 'Errore! La lunghezza della password deve avere un minimo di 8 caratteri e un massimo di 32 caratteri';
+
+      header('Location: ./errorGeneration.php');
+    }else{
+      session_start();
+
+      $_SESSION['passwordGenerated'] = generatePassword($characters, $_POST['generatePassword']);
+      
+      header('Location: ./passwordGenerated.php');
+    }
+  }
+
+  include __DIR__ . "/partials/head.php";
+?>
+
+  <h1 class="mb-3">Strong Password Generator</h1>
+
+  <h2 class="mb-3">Genera una password sicura</h2>
+
+  <form action="index.php" method="POST">
+    <div class="box box-paragraph d-flex rounded">
+      <p class="m-0">Scegliere una password con un minimo di 8 caratteri e un massimo di 32 caratteri</p>
+    </div>
+
+    <div class="box box-password d-flex flex-column rounded">
+      <div class="password d-flex justify-content-between align-items-center">
+        <span>Lunghezza password:</span>
+
+        <input type="number" name="generatePassword" class="form-control">
+      </div>
+
+      <div class="btns d-flex">
+        <button type="submit" class="btn btn-primary">Invia</button>
+
+        <button type="submit" class="btn btn-secondary ms-3">Annulla</button>
+      </div>
+    </div>
+  </form>
+</div>
 </body>
 </html>
